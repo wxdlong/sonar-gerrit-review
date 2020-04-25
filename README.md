@@ -1,4 +1,8 @@
 # sonar-gerrit-review
+  Fetch NewIssue from sonar server only for the code author. Convert to comments post to Gerrit.
+ If no issue, Code-Review +1； Else Code-Review -2.
+ 
+# Run the Docker
 
-a/changes/hello~master~I63c7cf7a6701649c0014e4a74ad903773ba8418e/revisions/4/review
-Jenkins sonar gerrit review plugin
+
+-g
