@@ -1,0 +1,28 @@
+version: "3"
+services:
+
+    gerrit:
+      image: gerritcodereview/gerrit
+      container_name: gerrit
+      hostname: gerrit
+      ports:
+      - "8080:8080"
+      - "29418:29418"
+
+    jenkins:
+      image: jenkins/jenkins:lts
+      container_name: jenkin
+      hostname: jenkin
+      ports:
+        - "8081:8080"
+        - "50000:50000"
+
+    sonar:
+      image: sonarqube:7.9.3-community
+      container_name: sonar
+      hostname: sonar
+      ports:
+        - "9000:9000"
+
+
+

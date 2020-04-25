@@ -1,0 +1,16 @@
+gerrit:
+  url: http://localhost:8080
+  name: wxdlong
+  pwd: changeme
+  changeId: I8473b95934b5732ac55d26311a706c9c2bde9940
+  reviewId: J9473b95934b5732aowk5d26311a706c9c2bde9912
+  codeReviewLabel: Code-Review
+
+sonar:
+  url: http://localhost:9001
+  name: wxdlong
+  timeout: 20
+  pwd: changeme
+  author: wxdlong@qq.com
+  task_url: http://localhost:9001/cetask/2w9l12ols.sl
+

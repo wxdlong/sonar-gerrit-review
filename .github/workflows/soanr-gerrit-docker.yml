@@ -1,0 +1,30 @@
+name: Download temp resources.
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Download!
+    - name: Login Docker Push images
+      env:
+        ACCESS_TOKEN: ${{ secrets.DOCKER_PW }} 
+      run: |
+        echo "PWD:${PWD}"
+
+        docker build . --file docker/Dockerfile --tag wxdlong/sonar-gerrit-review
+        docker login -u wxdlong -p ${ACCESS_TOKEN}
+        echo "push to docker hub"
+        docker push wxdlong/sonar-gerrit-review
+
+        echo "push to aliyun"
+        docker logout
+        docker login registry.cn-hangzhou.aliyuncs.com -u yjmnrg@gmail.com -p ${ACCESS_TOKEN}
+        docker tag wxdlong/sonar-gerrit-review registry.cn-hangzhou.aliyuncs.com/wxdlong/sonar-gerrit-review
+        docker push registry.cn-hangzhou.aliyuncs.com/wxdlong/sonar-gerrit-review
