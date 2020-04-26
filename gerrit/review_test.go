@@ -36,9 +36,8 @@ func TestSS(t *testing.T) {
 
 func TestReviewInput(t *testing.T) {
 	ci1 := &CommentInput{
-		Path: "test.java",
-		Line: 0,
-
+		Path:    "test.java",
+		Line:    0,
 		Message: "Var name is wrong!",
 	}
 

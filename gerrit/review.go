@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	REVIEW               = "/a/changes/%s/revisions/%s/review" //Review PATH
-	APPLICTION_JSON_UTF8 = "application/json; charset=UTF-8"
+	REVIEW              = "/a/changes/%s/revisions/%s/review" //Review PATH
+	ApplicationJsonUtf8 = "application/json; charset=UTF-8"
 )
 
 var client = &http.Client{}
@@ -71,7 +71,7 @@ type ReviewInput struct {
 type CommentInput struct {
 	// Id      string
 	Path  string `json:"path"`
-	Line  int    `json:"line"`
+	Line  int    `json:"line,omitempty"`
 	Range struct {
 		Start_line      int `json:"start_line"`
 		Start_character int `json:"start_character"`
@@ -139,7 +139,7 @@ func (gerrit *Gerrit) PostComment() {
 	log.Println("Post review:", review_url)
 	log.Println("   Comment:", commentJson)
 	req, _ := http.NewRequest("POST", gerrit.Url+review_url, comments)
-	req.Header.Set("Content-Type", APPLICTION_JSON_UTF8)
+	req.Header.Set("Content-Type", ApplicationJsonUtf8)
 	req.SetBasicAuth(gerrit.Name, gerrit.Pwd)
 	resp, err := client.Do(req)
 	if err != nil {
@@ -157,7 +157,7 @@ func (gerrit *Gerrit) GetChange() {
 	change_url := gerrit.Url + "/a/changes/" + gerrit.ChangeId
 	log.Println("GetChange: ", change_url)
 	req, _ := http.NewRequest("GET", change_url, nil)
-	req.Header.Set("Content-Type", APPLICTION_JSON_UTF8)
+	req.Header.Set("Content-Type", ApplicationJsonUtf8)
 	req.SetBasicAuth(gerrit.Name, gerrit.Pwd)
 	resp, err := client.Do(req)
 	if err != nil {
@@ -206,7 +206,7 @@ func (gerrit *Gerrit) Issue2Comment(issues *sonar.NewIssues, sonar_url string) {
 	}
 	gerrit.ReviewInput = &ReviewInput{}
 	if len(comments) == 0 {
-		gerrit.ReviewInput.Message = "Good Job, Nice Code!"
+		gerrit.ReviewInput.Message = "Nice Code!"
 		gerrit.ReviewInput.Labels = map[string]string{gerrit.CodeReviewLabel: "+1"}
 	} else {
 		gerrit.ReviewInput.Message = "Sonar Issue Found,Please fix and recommit."

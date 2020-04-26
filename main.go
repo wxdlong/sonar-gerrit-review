@@ -36,18 +36,18 @@ func init() {
 	flag.StringVar(&sonar_pwd, "spwd", "admin", "sonar pwd")
 	flag.StringVar(&sonar_task_url, "stask", "", "sonar task url")
 	flag.StringVar(&sonar_author, "sauthor", "", "sonar author")
-	flag.IntVar(&sonar_timeout, "stimeout", 40, "sonar timeout for checking task status")
+	flag.IntVar(&sonar_timeout, "stimeout", 50, "sonar timeout for checking task status")
 }
 
 func main() {
 	flag.Parse()
 
 	sonars := sonar.Sonar{Url: sonar_url,
-		Name:     sonar_name,
-		Pwd:      sonar_pwd,
-		Author:   sonar_author,
-		Task_url: sonar_task_url,
-		Timeout:  sonar_timeout,
+		Name:    sonar_name,
+		Pwd:     sonar_pwd,
+		Author:  sonar_author,
+		TaskUrl: sonar_task_url,
+		Timeout: sonar_timeout,
 	}
 
 	gerrits := gerrit.Gerrit{
