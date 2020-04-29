@@ -112,6 +112,7 @@ func (s *Sonar) WaitSonarResult() bool {
 			continue
 		case "SUCCESS":
 			log.Println("Sonar scanner SUCCESS......")
+			s.ComponentKeys = s.Tasks.Task.ComponentKey
 			return true
 		default:
 			log.Println("Sonar scanner error:", s.Tasks.Task.ErrorMessage)
